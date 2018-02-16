@@ -1,8 +1,10 @@
-function [t] = monthly(e0, eN)
+function [ts] = monthly(e0, eN)
 % MONTHLY Serie de tiempo a resolucion mensual.
 %
 %   [T] = MONTHLY(I, F) calcula un vector de fecha mensual, a partir de una
 %   fecha inicial (I) hasta una fecha final(F).
+%
+% I,F : fecha {string} e.g. '1984/12/24', o como numero serie e.g. 725000.00.
 %
 % See also DAILY
 %
@@ -10,13 +12,13 @@ function [t] = monthly(e0, eN)
 %   date: 2017.08.26
 
 i = 1;
-t(i) = e0;
-while t < eN
+t(i) = datenum(e0);
+while t(i) < datenum(eN)
     [y, m, d] = datevec(t(i));
-    t(i+1) = datenum(y, m+1, d);
     i = i + 1;
+    t(i) = datenum(y, m+1, d);
 end
 
-t = t(1:end-1);
+ts = t;
 
 end
